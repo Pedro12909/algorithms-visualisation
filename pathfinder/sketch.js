@@ -1,15 +1,18 @@
-const GRID_SIZE = 80;
+const DEFAULT_GRID_SIZE = 8;
+const DEFAULT_SPEED = 60;
 const WINDOW_WIDTH = 800;
 const WINDOW_HEIGHT = 800;
-const DEFAULT_SPEED = 60;
+
+let gridSize = DEFAULT_GRID_SIZE;
+let speed = DEFAULT_SPEED;
 
 function setupGrid() {
-  const squareWidth = WINDOW_WIDTH / GRID_SIZE;
-  const squareHeight = WINDOW_HEIGHT / GRID_SIZE;
+  const squareWidth = WINDOW_WIDTH / gridSize;
+  const squareHeight = WINDOW_HEIGHT / gridSize;
 
-  for (let i = 0; i < GRID_SIZE; i++) {
-    squares[i] = new Array(GRID_SIZE);
-    for(let j = 0; j < GRID_SIZE; j++) {
+  for (let i = 0; i < gridSize; i++) {
+    squares[i] = new Array(gridSize);
+    for(let j = 0; j < gridSize; j++) {
       const square = new Square(i, j, squareWidth, squareHeight);
       squares[i][j] = square;
       square.display();
@@ -41,7 +44,7 @@ function constructPath(node) {
 }
 
 function resetSketch() {
-  squares = new Array(GRID_SIZE);
+  squares = new Array(gridSize);
   orig = {};
   dest = {};
   openSet = [];
@@ -49,10 +52,24 @@ function resetSketch() {
   gameStarted = false;
 
   setupGrid();
-  setOriginAndDestination(squares[0][0], squares[GRID_SIZE - 1][GRID_SIZE - 1]);
+  setOriginAndDestination(squares[0][0], squares[gridSize - 1][gridSize - 1]);
 
   orig.gScore = 0;
   orig.fScore = 0 + heuristic(orig);
+}
+
+function handleDrawing() {
+  if (!mouseIsPressed) return;
+  const x = mouseX;
+  const y = mouseY;
+
+  if (x < 0 || y < 0 || x > width || y > height) return;
+
+  const i = floor(x / (width /gridSize));
+  const j = floor(y / (height / gridSize));
+
+  const pressedSquare = squares[i][j];
+  pressedSquare.makeWall();
 }
 
 function setup() {
@@ -62,7 +79,10 @@ function setup() {
 }
 
 function draw() {
-  if (!gameStarted) return;
+  if (!gameStarted) {
+    handleDrawing();
+    return;
+  };
 
   if (openSet.length > 0) {
     const currentNode = nextNodeInOpenSet();
@@ -97,6 +117,7 @@ function draw() {
     }
   } else {
     alert('Game Over! No Solution!');
+    squares = new Array(gridSize);
     resetSketch();
   }
 }

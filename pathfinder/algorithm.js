@@ -45,25 +45,25 @@ function getNodeNeighbors(node) {
   if (nodeXPos > 0 && !squares[nodeXPos - 1][nodeYPos].isWall) {
     neighbors.push(squares[nodeXPos - 1][nodeYPos]);
   }
-  if (nodeXPos < GRID_SIZE - 1 && !squares[nodeXPos + 1][nodeYPos].isWall) {
+  if (nodeXPos < gridSize - 1 && !squares[nodeXPos + 1][nodeYPos].isWall) {
     neighbors.push(squares[nodeXPos + 1][nodeYPos]);
   }
   if (nodeYPos > 0 && !squares[nodeXPos][nodeYPos - 1].isWall) {
     neighbors.push(squares[nodeXPos][nodeYPos - 1]);
   }
-  if (nodeYPos < GRID_SIZE - 1 && !squares[nodeXPos][nodeYPos + 1].isWall) {
+  if (nodeYPos < gridSize - 1 && !squares[nodeXPos][nodeYPos + 1].isWall) {
     neighbors.push(squares[nodeXPos][nodeYPos + 1]);
   }
   if (nodeXPos > 0 && nodeYPos > 0 && !squares[nodeXPos - 1][nodeYPos - 1].isWall) {
     neighbors.push(squares[nodeXPos - 1][nodeYPos - 1]);
   }
-  if (nodeXPos < GRID_SIZE - 1 && nodeYPos > 0 && !squares[nodeXPos + 1][nodeYPos - 1].isWall) {
+  if (nodeXPos < gridSize - 1 && nodeYPos > 0 && !squares[nodeXPos + 1][nodeYPos - 1].isWall) {
     neighbors.push(squares[nodeXPos + 1][nodeYPos - 1]);
   }
-  if (nodeXPos > 0 && nodeYPos < GRID_SIZE - 1 && !squares[nodeXPos - 1][nodeYPos + 1].isWall) {
+  if (nodeXPos > 0 && nodeYPos < gridSize - 1 && !squares[nodeXPos - 1][nodeYPos + 1].isWall) {
     neighbors.push(squares[nodeXPos - 1][nodeYPos + 1]);
   }
-  if (nodeXPos < GRID_SIZE - 1 && nodeYPos < GRID_SIZE - 1 && !squares[nodeXPos + 1][nodeYPos + 1].isWall) {
+  if (nodeXPos < gridSize - 1 && nodeYPos < gridSize - 1 && !squares[nodeXPos + 1][nodeYPos + 1].isWall) {
     neighbors.push(squares[nodeXPos + 1][nodeYPos + 1]);
   }
 

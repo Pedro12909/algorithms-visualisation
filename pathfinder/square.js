@@ -4,17 +4,20 @@ class Square {
     this.yPos = yPos;
     this.width = width;
     this.height = height;
-    this.color = 'white';
+    this.color = SQUARE_COLOR;
     this.parent = undefined;
-    this.isWall = random() < 0.3;
+    this.isWall = false;
     this.gScore = Number.MAX_SAFE_INTEGER;
-
-    if (this.isWall) this.color = 'black'
   }
 
   display() {
     fill(this.color);
     rect(this.xPos * this.width, this.yPos * this.height, this.width, this.height);
+  }
+
+  makeWall() {
+    this.isWall = true;
+    this.updateColor(WALL_COLOR);
   }
 
   updateColor(color) {
